@@ -101,12 +101,12 @@ lizards had long since ended.
 ![рис.8](~/Pictures/Screenshots/Picture8.png)
 
 Загружаю файлы в Github
-cd ~/work/study/2025-2026/"Архитектура компьютера"/arch-pc (рис.9) "ссылка на гитхаб отчет 3 вставить"
+cd ~/work/study/2025-2026/"Архитектура компьютера"/arch-pc (рис.9) https://github.com/aasidorova1/study_2025-2026_arch-pc/tree/master/labs/lab03/report
 
 ![рис.9](~/Pictures/Screenshots/Picture9.png)
 
 Создаю в соответствующем каталоге отчёт по лабораторной работе №2 в формате Markdown, а также отчеты в формате docx и pdf. 
-Загружаю все на Github. (рис.10) "ссылка на гитхаб  отчет 2 вставить"
+Загружаю все на Github. (рис.10)
 
 ![рис.10](~/Pictures/Screenshots/Picture10.png)
 
