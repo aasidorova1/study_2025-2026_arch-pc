@@ -70,7 +70,7 @@ NASM используется Intel-синтаксис и поддерживаю
 
 Процесс создания ассемблерной программы можно изобразить в виде следующей схемы (рис.0.1)
 
-![рис.0.1](home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen0.1)
+![рис.0.1](image/screen0.1.png)
 
 # Выполнение лабораторной работы
 
@@ -78,70 +78,70 @@ NASM используется Intel-синтаксис и поддерживаю
 
 Создаю каталог для работы с программами на языке ассемблер NASM. (рис.1)
 
-![рис.1](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen1)
+![рис.1](image/screen1.png)
 
 Перехожу в созданный каталог (рис.2)
 
-![рис.2](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen2)
+![рис.2](image/Pamp4/screen2.png)
 
 Создаю текстовый файл с именем hello.asm и открываю его с помощью текстового редактора gedit (рис.3-4)
 
-![рис.3](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen3)
+![рис.3](image/Pamp4/screen3.png)
 
-![рис.4](/home/aasidorova1/Pictures/Screenshots/Pamp4/screen4.png "screen4")
+![рис.4](image/Pamp4/screen4.png)
 
 ввела текст в этот файл (рис.5)
 
-![рис.5](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen5)
+![рис.5](image/Pamp4/screen5.png)
 
 ## 2. Транслятор NASM
 
 Компилирую текст программы «Hello World» и проверяю, что записался объектный код в файл hello.o с помощью команды ls. (рис.6)
 
-![рис.6](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen6)
+![рис.6](image/Pamp4/screen6.png)
 
 ## 3. Расширенный синтаксис командной строки NASM
 
 Выполняю команду nasm -o obj.o -f elf -g -l list.lst hello.asm и с помощью команды ls проверила работу команды.(рис.7)
 
-![рис.7](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen7)
+![рис.7](image/Pamp4/screen7.png)
 
-![рис.8](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen8)
+![рис.8](image/Pamp4/screen8.png)
  
 ## 4. Компоновщик LD
 
 Передаю файл на обработку компановщику и проверяем исполнение команды, а также создание файла hello. (рис.9)
 
-![рис.9](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen9)
+![рис.9](image/Pamp4/screen9.png)
 
 Выполняю следующую команду и проверяю что она выполнилась с помощбю команды ls. (рис.10)
 
-![рис.10](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen10)
+![рис.10](image/screen10.png)
 
 ## 5.Запуск исполняемого файла 
 
 Запускаю на выполнение созданный исполняемый файл, находящийся в текущем каталоге,
 набраю в командной строке ./hello (рис.11)
 
-![рис.11](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen11)
+![рис.11](image/Pamp4/screen11.png)
 
 ## Задание для самостоятельной работы 
 
 1. Создала копию файла hello.asm с именем lab4.asm. (рис.12)
 
-![рис.12](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen12)
+![рис.12](image/Pamp4/screen12.png)
 
 2. Внесла изменение  текст программы. Заменила Hello world! на моё имя и фамилия.
 Оттранслировала полученный текст программы lab4.asm в объектный файл. Выполнила
 компоновку объектного файла и запустила получившийся исполняемый файл.(рис.13)
 
-![рис.13](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen13)
+![рис.13](image/Pamp4/screen13.png)
 
 Скопировала файлы hello.asm и lab4.asm в Мой локальный репозиторий в ката-
 лог ~/work/study/2023-2024/"Архитектура компьютера"/arch-pc/labs/lab04/.
 И загрузила файлы на Github.(рис.14)
 
-![рис.14](/home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen14)
+![рис.14](image/Pamp4/screen14.png)
 
 # Вывод 
 
