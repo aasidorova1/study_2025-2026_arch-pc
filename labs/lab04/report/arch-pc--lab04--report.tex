@@ -1,0 +1,495 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  english,
+  russian,
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{setspace}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+\ifLuaTeX
+\usepackage[bidi=basic,provide=*]{babel}
+\else
+\usepackage[bidi=default,provide=*]{babel}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+\usepackage[backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+
+\usepackage[]{csquotes}
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \usepackage[math,RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},DefaultFeatures={Ligatures=Common}]{plex-otf}
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={ОТЧЕТ ПО ЛАБОРАТОРНОЙ РАБОТЕ № 4},
+  pdfauthor={Сидорова А.А.},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{\textbf{ОТЧЕТ ПО ЛАБОРАТОРНОЙ РАБОТЕ № 4}}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{\emph{дисциплина: Архитектура компьютера}}
+\author{Сидорова А.А.}
+\date{}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+
+\setstretch{1.5}
+\chapter{Цель
+работы}\label{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}
+
+Освоение процедуры кампиляции и сборки программ, написанных на
+ассемблере NASM.
+
+\chapter{Задание для самостоятельной
+работы}\label{ux437ux430ux434ux430ux43dux438ux435-ux434ux43bux44f-ux441ux430ux43cux43eux441ux442ux43eux44fux442ux435ux43bux44cux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  В каталоге \textasciitilde/work/arch-pc/lab04 с помощью команды cp
+  создайте копию файла hello.asm с именем lab4.asm
+\item
+  С помощью любого текстового редактора внесите изменения в текст
+  программы в файле lab4.asm так, чтобы вместо Hello world! на экран
+  выводилась строка с вашими фамилией и именем.
+\item
+  Оттранслируйте полученный текст программы lab4.asm в объектный файл.
+  Выполните компоновку объектного файла и запустите получившийся
+  исполняемый файл.
+\item
+  Скопируйте файлы hello.asm и lab4.asm в Ваш локальный репозиторий в
+  ката- лог \textasciitilde/work/study/2023-2024/\enquote{Архитектура
+  компьютера}/arch-pc/labs/lab04/. Загрузите файлы на Github.
+\end{enumerate}
+
+\chapter{Теоретическое
+введение}\label{ux442ux435ux43eux440ux435ux442ux438ux447ux435ux441ux43aux43eux435-ux432ux432ux435ux434ux435ux43dux438ux435}
+
+\section{Основные принципы работы
+компьютера}\label{ux43eux441ux43dux43eux432ux43dux44bux435-ux43fux440ux438ux43dux446ux438ux43fux44b-ux440ux430ux431ux43eux442ux44b-ux43aux43eux43cux43fux44cux44eux442ux435ux440ux430}
+
+Основными функциональными элементами любой электронно-вычислительной
+машины (ЭВМ) являются центральный процессор, память и периферийные
+устройства (рис. 4.1). Взаимодействие этих устройств осуществляется
+через общую шину, к которой они подклю- чены. Физически шина
+представляет собой большое количество проводников, соединяющих
+устройства друг с другом. В современных компьютерах проводники выполнены
+в виде элек- тропроводящих дорожек на материнской (системной) плате.
+Основной задачей процессора является обработка информации, а также
+организация координации всех узлов компьютера. В состав центрального
+процессора (ЦП) входят следующие устройства: • арифметико-логическое
+устройство (АЛУ) --- выполняет логические и арифметиче- ские действия,
+необходимые для обработки информации, хранящейся в памяти; • устройство
+управления (УУ) --- обеспечивает управление и контроль всех устройств
+компьютера; • регистры --- сверхбыстрая оперативная память небольшого
+объёма, входящая в со- став процессора, для временного хранения
+промежуточных результатов выполнения инструкций; регистры процессора
+делятся на два типа: регистры общего назначения и специальные регистры.
+\#\# Ассемблер и язык ассемблера
+
+Язык ассемблера (assembly language, сокращённо asm) ---
+машинно-ориентированный язык низкого уровня. Можно считать, что он
+больше любых других языков приближен к архитектуре ЭВМ и её аппаратным
+возможностям, что позволяет получить к ним более полный доступ, нежели в
+языках высокого уровня, таких как C/C++, Perl, Python и пр. NASM --- это
+открытый проект ассемблера, версии которого доступны под различные
+операционные системы и который позволяет получать объектные файлы для
+этих систем. В NASM используется Intel-синтаксис и поддерживаются
+инструкции x86-64.
+
+\section{Процесс создания и обработки программы на языке
+ассемблера}\label{ux43fux440ux43eux446ux435ux441ux441-ux441ux43eux437ux434ux430ux43dux438ux44f-ux438-ux43eux431ux440ux430ux431ux43eux442ux43aux438-ux43fux440ux43eux433ux440ux430ux43cux43cux44b-ux43dux430-ux44fux437ux44bux43aux435-ux430ux441ux441ux435ux43cux431ux43bux435ux440ux430}
+
+Процесс создания ассемблерной программы можно изобразить в виде
+следующей схемы (рис.0.1)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen0.1}}
+
+}
+
+\caption{рис.0.1}
+
+\end{figure}%
+
+\chapter{Выполнение лабораторной
+работы}\label{ux432ux44bux43fux43eux43bux43dux435ux43dux438ux435-ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\section{1. Программа Hello
+world!}\label{ux43fux440ux43eux433ux440ux430ux43cux43cux430-hello-world}
+
+Создаю каталог для работы с программами на языке ассемблер NASM. (рис.1)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen1.pdf}}
+
+}
+
+\caption{рис.1}
+
+\end{figure}%
+
+Перехожу в созданный каталог (рис.2)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen2.pdf}}
+
+}
+
+\caption{рис.2}
+
+\end{figure}%
+
+Создаю текстовый файл с именем hello.asm и открываю его с помощью
+текстового редактора gedit (рис.3-4)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen3.pdf}}
+
+}
+
+\caption{рис.3}
+
+\end{figure}%
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/Pictures/Screenshots/Pamp4/screen4.png}}
+
+}
+
+\caption{рис.4}
+
+\end{figure}%
+
+ввела текст в этот файл (рис.5)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen5.pdf}}
+
+}
+
+\caption{рис.5}
+
+\end{figure}%
+
+\section{2. Транслятор
+NASM}\label{ux442ux440ux430ux43dux441ux43bux44fux442ux43eux440-nasm}
+
+Компилирую текст программы «Hello World» и проверяю, что записался
+объектный код в файл hello.o с помощью команды ls. (рис.6)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen6.pdf}}
+
+}
+
+\caption{рис.6}
+
+\end{figure}%
+
+\section{3. Расширенный синтаксис командной строки
+NASM}\label{ux440ux430ux441ux448ux438ux440ux435ux43dux43dux44bux439-ux441ux438ux43dux442ux430ux43aux441ux438ux441-ux43aux43eux43cux430ux43dux434ux43dux43eux439-ux441ux442ux440ux43eux43aux438-nasm}
+
+Выполняю команду nasm -o obj.o -f elf -g -l list.lst hello.asm и с
+помощью команды ls проверила работу команды.(рис.7)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen7.pdf}}
+
+}
+
+\caption{рис.7}
+
+\end{figure}%
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen8.pdf}}
+
+}
+
+\caption{рис.8}
+
+\end{figure}%
+
+\section{4. Компоновщик
+LD}\label{ux43aux43eux43cux43fux43eux43dux43eux432ux449ux438ux43a-ld}
+
+Передаю файл на обработку компановщику и проверяем исполнение команды, а
+также создание файла hello. (рис.9)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen9.pdf}}
+
+}
+
+\caption{рис.9}
+
+\end{figure}%
+
+Выполняю следующую команду и проверяю что она выполнилась с помощбю
+команды ls. (рис.10)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen10.pdf}}
+
+}
+
+\caption{рис.10}
+
+\end{figure}%
+
+\section{5.Запуск исполняемого
+файла}\label{ux437ux430ux43fux443ux441ux43a-ux438ux441ux43fux43eux43bux43dux44fux435ux43cux43eux433ux43e-ux444ux430ux439ux43bux430}
+
+Запускаю на выполнение созданный исполняемый файл, находящийся в текущем
+каталоге, набраю в командной строке ./hello (рис.11)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen11.pdf}}
+
+}
+
+\caption{рис.11}
+
+\end{figure}%
+
+\section{Задание для самостоятельной
+работы}\label{ux437ux430ux434ux430ux43dux438ux435-ux434ux43bux44f-ux441ux430ux43cux43eux441ux442ux43eux44fux442ux435ux43bux44cux43dux43eux439-ux440ux430ux431ux43eux442ux44b-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Создала копию файла hello.asm с именем lab4.asm. (рис.12)
+\end{enumerate}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen12.pdf}}
+
+}
+
+\caption{рис.12}
+
+\end{figure}%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Внесла изменение текст программы. Заменила Hello world! на моё имя и
+  фамилия. Оттранслировала полученный текст программы lab4.asm в
+  объектный файл. Выполнила компоновку объектного файла и запустила
+  получившийся исполняемый файл.(рис.13)
+\end{enumerate}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen13.pdf}}
+
+}
+
+\caption{рис.13}
+
+\end{figure}%
+
+Скопировала файлы hello.asm и lab4.asm в Мой локальный репозиторий в
+ката- лог \textasciitilde/work/study/2023-2024/\enquote{Архитектура
+компьютера}/arch-pc/labs/lab04/. И загрузила файлы на Github.(рис.14)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./home/aasidorova1/work/study/2025-2026/Архитектура компьютера/arch-pc/labs/lab04/report/image/Pamp4/screen14.pdf}}
+
+}
+
+\caption{рис.14}
+
+\end{figure}%
+
+\chapter{Вывод}\label{ux432ux44bux432ux43eux434}
+
+В ходе этой лабораторной работы я приобрела практические навыки по
+пользованию ассемблера NASM.
+
+
+\printbibliography
+
+
+
+\end{document}

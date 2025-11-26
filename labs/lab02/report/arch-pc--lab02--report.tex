@@ -1,0 +1,571 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  english,
+  russian,
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{setspace}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+\ifLuaTeX
+\usepackage[bidi=basic,provide=*]{babel}
+\else
+\usepackage[bidi=default,provide=*]{babel}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+\usepackage[backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+
+\usepackage[]{csquotes}
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \usepackage[math,RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},DefaultFeatures={Ligatures=Common}]{plex-otf}
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={ОТЧЕТ ПО ЛАБОРАТОРНОЙ РАБОТЕ № 2},
+  pdfauthor={Сидорова А.А.},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{ОТЧЕТ ПО ЛАБОРАТОРНОЙ РАБОТЕ № 2}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{дисциплина: Архитектура компьютера}
+\author{Сидорова А.А.}
+\date{}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+
+\setstretch{1.5}
+\chapter{Цель
+работы}\label{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}
+
+Целью работы является изучение идеологии и применения средств контроля
+версий, приобретение практических навыков по работе с системой контроля
+версий git
+
+\chapter{Задание для самостоятельной
+работы}\label{ux437ux430ux434ux430ux43dux438ux435-ux434ux43bux44f-ux441ux430ux43cux43eux441ux442ux43eux44fux442ux435ux43bux44cux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Создайте отчет по выполнению лабораторной работы в соответствующем ка
+  талоге рабочего пространства (labs/lab02/report).
+\item
+  Скопируйте отчеты по выполнению предыдущих лабораторных работ в соо
+  тветствующие каталоги созданного рабочего пространства.
+\item
+  Загрузите файлы на github.
+\end{enumerate}
+
+\chapter{Теоретическое
+введение}\label{ux442ux435ux43eux440ux435ux442ux438ux447ux435ux441ux43aux43eux435-ux432ux432ux435ux434ux435ux43dux438ux435}
+
+\section{Основные команды
+git.}\label{ux43eux441ux43dux43eux432ux43dux44bux435-ux43aux43eux43cux430ux43dux434ux44b-git.}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.1895}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.8105}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Команда
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Описание
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{git\ init} & создание основного дерева репозитория \\
+\texttt{git\ pull} & получение обновлений (изменений) текущего дерева из
+центрального репозитория \\
+\texttt{git\ push\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbar{}\ отправка\ всех\ произведённых\ изменений\ локального\ дерева\ в\ центральный\ репозиторий\textbar{}\ \textbar{}}git
+status\texttt{\textbar{}\ просмотр\ списка\ изменённых\ файлов\ в\ текущей\ директории\textbar{}\ \textbar{}}git
+diff\texttt{\textbar{}\ просмотр\ текущих\ изменений\textbar{}\ \textbar{}}git
+add
+.\texttt{\textbar{}\ добавить\ все\ изменённые\ и/или\ созданные\ файлы\ и/или\ каталоги\textbar{}\ \textbar{}}git
+add
+имена\_файлов\texttt{\textbar{}\ добавить\ конкретные\ изменённые\ и/или\ созданные\ файлы\ и/или\ каталоги\textbar{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbar{}\ \textbar{}}git
+rm
+имена\_файлов\texttt{\textbar{}\ удалить\ файл\ и/или\ каталог\ из\ индекса\ репозитория\ (при\ этом\ файл\ и/или\ каталог\ остаётся\ в\ локальной\ директории)\textbar{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbar{}\ \textbar{}}git
+commit -am \enquote*{Описание
+коммита}\texttt{\textbar{}\ сохранить\ все\ добавленные\ изменения\ и\ все\ изменённые\ файлы\textbar{}\ \textbar{}}git
+checkout -b
+имя\_ветки\texttt{\textbar{}\ создание\ новой\ ветки,\ базирующейся\ на\ текущей\textbar{}\ \textbar{}}git
+checkout
+имя\_ветки\texttt{\textbar{}\ переключение\ на\ некоторую\ ветку\ (при\ переключении\ на\ ветку,\ которой\ ещё\ нет\ в\ локальном\ репозитории,\ она\ будет\ создана\ и\ связана\ с\ удалённой)\textbar{}\ \textbar{}}git
+push origin
+имя\_ветки\texttt{\textbar{}\ отправка\ изменений\ конкретной\ ветки\ в\ центральный\ репозиторий\textbar{}\ \textbar{}}git
+merge --no-ff
+имя\_ветки\texttt{\textbar{}\ слияние\ ветки\ с\ текущим\ деревом\textbar{}\ \textbar{}}git
+branch -d
+имя\_ветки\texttt{\textbar{}\ удаление\ локальной\ уже\ слитой\ с\ основным\ деревом\ ветки\textbar{}\ \textbar{}}git
+branch -d
+имя\_ветки\texttt{\textbar{}\ принудительное\ удаление\ локальной\ ветки\textbar{}\ \textbar{}}git
+push origin :имя\_ветки` & удаление ветки с центрального репозитория \\
+\end{longtable}
+
+\chapter{Выполнение лабораторной
+работы}\label{ux432ux44bux43fux43eux43bux43dux435ux43dux438ux435-ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Настройка GitHub Перешла на сайт GitHub (https://github.com/) и
+  создала там учетную запись (рис.1)
+\end{enumerate}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/1.jng}}
+
+}
+
+\caption{рис.1}
+
+\end{figure}%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Базовая настройка git После создания запускаю виртуальную машину
+  ubuntu. В терминале делаю предварительную конфигурацию git, вводя своё
+  имя и email. (рис. 2.1)
+\end{enumerate}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/2.1.jng}}
+
+}
+
+\caption{рис.2.1}
+
+\end{figure}%
+
+Потом я настроила utf-8 в выводе сообщений git для правильного
+отображения символов (рис.2.2)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/2.2.jng}}
+
+}
+
+\caption{рис.2.2}
+
+\end{figure}%
+
+Задаю название «master» для начальной ветки. (рис. 2.3)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/2.3.jng}}
+
+}
+
+\caption{рис.2.3}
+
+\end{figure}%
+
+Ввожу параметры autocrlf и safecrlf с помощью команд ниже. (рис.2.4)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/2.4.jng}}
+
+}
+
+\caption{рис.2.4}
+
+\end{figure}%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Создание ssh-ключа Первым делом генерирую несколько приватных и
+  открытых ключей. Для этого применяю команду ssh-keygen -C
+  \enquote{aasidorova\href{mailto:1032256488@pfur.ru}{\nolinkurl{1032256488@pfur.ru}}}.
+  Ключи сохраняются в каталоге \textasciitilde/.ssh/. (рис.3.1)
+\end{enumerate}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/3.1.jng}}
+
+}
+
+\caption{рис.3.1}
+
+\end{figure}%
+
+Скопировала ключ в буфер обмена (рис. 3.2).
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/3.2.jng}}
+
+}
+
+\caption{рис.3.2}
+
+\end{figure}%
+
+Вставила этот код на сайте GitHub в разделе SSH and GPG keys. (рис. 3.3)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/3.3.jng}}
+
+}
+
+\caption{рис.3.3}
+
+\end{figure}%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Создание рабочего пространства и репозитория курса на основе шаблона
+  Создаю каталог для предмета для предмета \enquote{Архитектура
+  компьютера} (рис.4).
+\end{enumerate}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/4.jng}}
+
+}
+
+\caption{рис.4}
+
+\end{figure}%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Создание репозитория курса на основе шаблона Перехожу по ссылке
+  https://github.com/yamadharma/course-directory-student template и
+  выбираю Use this template(рис.5.1) В открывшимся окне указываю
+  название и создаю репозиторий. (рис.5.2)
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/5.1.jng}}
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/5.2.jng}}
+
+Затем открываю терминал и перехожу в каталог курса с помощью cd
+\textasciitilde/work/study/2025--2026/\enquote{Архитектура компьютера}
+(рис.5.3)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/5.3.jng}}
+
+}
+
+\caption{рис.5.3}
+
+\end{figure}%
+
+Клонирую созданный репозиторий (рис. 5.4), используя ссылку,
+скопированную с сайта. (рис. 5.5)
+
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/5.4.jng}}
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/5.5.jng}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Настройка каталога курса Я перешла в каталог курса: cd
+  \textasciitilde/work/study/2023-2024/\enquote{Архитектура
+  компьютера}/arch-p и создала необходимые каталоги: echo arch-pc
+  \textgreater{} COURSE make prepare
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/6.1.jng}}
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/6.2.jng}}
+
+Отправляю созданные каталоги с локального репозитория на сервер с
+помощью git add, комментирую и сохраняю изменения как добавление курса с
+помощью git commit.(рис.6.3)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/6.3.jng}}
+
+}
+
+\caption{рис.6.3}
+
+\end{figure}%
+
+Отправляю файлы на сервер (рис. 6.4).
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/6.4.jng}}
+
+}
+
+\caption{рис.6.4}
+
+\end{figure}%
+
+Проверяю правильность создания иерархии рабочего пространства в
+локальном репозитории и на странице github. (рис.6.5,6.6)
+
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/6.5.jng}}
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/6.6.jng}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Задание для самостоятельной работы С помощью утилиты cd перехожу в
+  labs/lab02/report (рис. 7.1) и создаю файл для отчета по этой
+  лабораторной работе. (рис. 7.2)
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/7.1.jng}}
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/7.2.jng}}
+
+Перемещаюсь в каталог предыдущей лабораторной работы (рис.7.3)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/7.3.jng}}
+
+}
+
+\caption{рис.7.3}
+
+\end{figure}%
+
+Проверяю расположение файла с отчетом по лабораторной работе №1.
+(рис.7.4)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/7.4.jng}}
+
+}
+
+\caption{рис.7.4}
+
+\end{figure}%
+
+Перемещаю этот файл в каталог lab01/report с помощью команды mv,
+проверяю наличие файла. (рис.7.5)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{./Downloads/7.5.jng}}
+
+}
+
+\caption{рис.7.5}
+
+\end{figure}%
+
+С помощью команды git add добавила в коммит отчёты по двум
+лабораторнымработам. Отправляю в центральный репозиторий сохраненные
+изменения. (рис 7.6, рис.7.7).
+
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/7.6.jng}}
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/7.7.jng}}
+
+Проверяю правильность выполненных действий на сайте. На рисунке 7.8 я
+убеждаюсь в том, что указанный мной комментарий отображается (Add
+existing file), и на рисунке 7.9 отображается добавленный файл.
+
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/7.8.jng}}
+\pandocbounded{\includegraphics[keepaspectratio]{./Downloads/7.9.jng}}
+
+После создания отчета по этой лабораторной работе я делаю действия
+аналогичные, показанным в рисунках 7.4-7.9
+
+\chapter{Вывод}\label{ux432ux44bux432ux43eux434}
+
+В ходе работы я приобрела практические навыки работы с системой контроля
+версий GitHub, разобрав следующие команды: clone, add, commit, push.
+Также я изучила идеологию и применение подобных систем.
+
+
+\printbibliography
+
+
+
+\end{document}
